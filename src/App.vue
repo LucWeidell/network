@@ -7,10 +7,17 @@
       its possible it work: Look at the m-0 and p0 EVERYTHING FOR rows and cols -->
 
       <!-- NOTE login component done above: ^ -->
-      <div class="col-md-9 d-flex flex-column p-0 m-0 ">
+      <div class="col-md-9 flex-grow-1 d-flex flex-column p-0 m-0 ">
         <!-- FIXME navbar compoent here -->
         <NavBar />
-        <router-view />
+        <div class="row flex-grow-1">
+          <div class="col-md-9 flex-grow-1">
+            <router-view />
+          </div>
+          <div class="col-md-3">
+          <!-- FIXME Ad component here -->
+          </div>
+        </div>
       </div>
     </div>
   </main>
