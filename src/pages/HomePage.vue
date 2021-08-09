@@ -38,6 +38,7 @@ export default {
           const condition = url.split('?')
           const query = { condition }
           await postsService.getAllPosts(query)
+          state.posts = AppState.posts
         } catch (error) {
           Pop.toast(error, 'error')
         }

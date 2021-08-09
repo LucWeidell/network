@@ -30,7 +30,7 @@
       </h3>
     </div>
     <div class="col-md-12 d-flex flex-column align-items-start text-left">
-      <p>{{ state.profile.body }}</p>
+      <p>{{ state.profile.bio }}</p>
     </div>
     <div class="col-md-12 d-flex flex-column align-items-end">
       <button type="button" class="btn btn-primary">
