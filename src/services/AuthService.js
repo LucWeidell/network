@@ -3,9 +3,10 @@ import { post } from 'jquery'
 import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../env'
 import { router } from '../router'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
+import { extrasService } from './ExtrasService'
 import { postsService } from './PostsService'
 // import { socketService } from './SocketService'
 
@@ -27,7 +28,9 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   api.defaults.headers.authorization = AuthService.bearer
   api.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
-  logger.log('Appstate user from auth:', AppState.user)
+  // logger.log('Appstate user from auth:', AppState.user)
+  // NOTE Get ads first since auth doesn't matter
+  await extrasService.getAllExtras()
   await accountService.getAccount()
   // socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here

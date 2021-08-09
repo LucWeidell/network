@@ -1,13 +1,13 @@
-import { api } from 'axios'
+import { api } from '../services/AxiosService'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
-import { convertToJson } from '../utils/Query'
+import { convertToQuery } from '../utils/Query'
 
 class ExtrasService {
   async getAllExtras(query = {}) {
-    const res = await api.get('api/ads' + convertToJson(query))
-    logger.log('Sandbox ads return:', res.data)
-    AppState.extras = res.extras
+    const res = await api.get('api/ads' + convertToQuery(query))
+    logger.log('Sandbox extras getter return:', res.data)
+    AppState.extras = res.data
   }
 }
 

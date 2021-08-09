@@ -15,7 +15,8 @@
             <router-view />
           </div>
           <div class="col-md-3">
-          <!-- FIXME Ad component here -->
+            <!-- FIXME  Ad component here -->
+            <ExtrasCard v-for="e in appState.extras" :key="e.id" :extra="e" />
           </div>
         </div>
       </div>
@@ -26,7 +27,6 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from './AppState'
-import { AuthService } from './services/AuthService'
 
 export default {
   name: 'App',
