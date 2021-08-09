@@ -84,8 +84,15 @@ export default {
           Pop.toast(error, 'error')
         }
       },
+      // NOTE im assumeing this ex: was correct
+      // ex post.likeIds: {{ 0: "61104e40d7ce6b36aeacba8e"}}
       isSelfLiked: computed(() => {
-        return props.post.likeIds[state.account.id]
+        const likes = props.post.likeIds
+        let result = false
+        for (const keys in likes) {
+          result = (likes[keys] === state.account.id)
+        }
+        return result
       })
     }
   }
