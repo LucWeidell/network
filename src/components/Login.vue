@@ -1,24 +1,30 @@
 <template>
   <div v-if="user.isAuthenticated"
-       class=" Login col-md-3 shadow-sm p-0 mx-0 my-5 py-5
-      d-flex flex-column align-items-center justify-content-start "
+       class=" Login col-md-3 shadow-sm px-4 mx-0 my-5 py-5
+      d-flex flex-column align-items-center justify-content-start text-left "
   >
-    <router-link :to="{ name: 'Profile', params:{ id: user.id}}">
-      <img :src="user.picture" alt="profile-pic" class="circularPic">
+    <router-link :to="{ name: 'Profile', params:{ id: user}}">
+      <img :src="account.picture" alt="profile-pic" class="circularPic w-100 px-3">
     </router-link>
     <!-- NOTE if graduated add the p Tage with class and year -->
-    <p v-if="user.graduated" class="pt-2">
-      {{ user.class }} {{ user.year }}
+    <p v-if="account.graduated" class="pt-2">
+      {{ account.class }}
     </p>
-    <h4>{{ user.name }}</h4>
-    <i class="mdi mdi-github">{{ user.github }}</i><br>
-    <i class="mdi mdi-transit-connection-variant">{{ user.linkedin }}</i><br>
-    <i class="mdi mdi-file-account">
-      <a :href="user.resume">Resume</a></i><br>
-
-    <button type="button" @click="logout" class="btn btn-primary action hoverable">
-      logout
-    </button>
+    <h4>{{ account.name }}</h4>
+    <div class="d-flex flex-column align-items-start my-4">
+      <a :href="account.gitHub">
+        <i class="mdi mdi-github">{{ account.github }}</i>
+      </a><br>
+      <a :href="account.linkedin">
+        <i class="mdi mdi-transit-connection-variant">{{ account.linkedin }}</i>
+      </a><br>
+      <a :href="account.resume">
+        <i class="mdi mdi-file-account">Resume</i>
+      </a><br>
+      <button type="button" @click="logout" class="btn btn-primary action hoverable">
+        logout
+      </button>
+    </div>
   </div>
 
   <div v-else
@@ -50,6 +56,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },

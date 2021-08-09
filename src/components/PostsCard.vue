@@ -1,7 +1,7 @@
 <template>
   <div class="PostsCard row py-2 border border-card mts-3 shadow">
     <div class=" col-md-2 d-flex">
-      <router-link :to="{ name: 'Profile', params:{ id: post.creator.id}}">
+      <router-link :to="{ name: 'Profile', params:{ id: post.creator}}">
         <img :src="post.creator.picture" alt="creator-pic" class="circularPic logo-img">
       </router-link>
     </div>
@@ -44,7 +44,6 @@ import Pop from '../utils/Notifier'
 import { postAgeTag } from '../utils/PostTimeTagger'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-// import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -58,7 +57,8 @@ export default {
     const state = reactive({
       editPost: props.post,
       postMadeAt: new Date(props.post.createdAt),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      user: computed(() => AppState.user)
     })
     return {
       state,
