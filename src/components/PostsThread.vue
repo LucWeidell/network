@@ -18,15 +18,6 @@ export default {
 
   setup(props) {
     logger.log('Posts Array:', props)
-    // onMounted(async() => {
-    //   try {
-    //     await postsService.getAllPosts()
-    //     Pop.toast('success', 'success')
-    //     logger.log('USER?', AppState.user)
-    //   } catch (error) {
-    //     Pop.toast(error, 'error')
-    //   }
-    // })
     return {}
   }
 }

@@ -10,7 +10,7 @@ export const AppState = reactive({
   extras: {},
 
   /** @type {String} String of the url for next 20 posts */
-  newerPosts: '',
+  newerPosts: null,
   /** @type {String} String of the url for previous 20 posts */
-  previousPosts: ''
+  previousPosts: null
 })
