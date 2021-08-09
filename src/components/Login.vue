@@ -3,7 +3,9 @@
        class=" Login col-md-3 shadow-sm p-0 mx-0 my-5 py-5
       d-flex flex-column align-items-center justify-content-start "
   >
-    <img :src="user.picture" alt="profile-pic" class="circularPic">
+    <router-link :to="{ name: 'Profile', params:{ id: user.id}}">
+      <img :src="user.picture" alt="profile-pic" class="circularPic">
+    </router-link>
     <!-- NOTE if graduated add the p Tage with class and year -->
     <p v-if="user.graduated" class="pt-2">
       {{ user.class }} {{ user.year }}

@@ -1,7 +1,9 @@
 <template>
   <div class="PostsCard row py-2 border border-card mts-3 shadow">
     <div class=" col-md-2 d-flex">
-      <img :src="post.creator.picture" alt="creator-pic" class="circularPic logo-img">
+      <router-link :to="{ name: 'Profile', params:{ id: post.creator.id}}">
+        <img :src="post.creator.picture" alt="creator-pic" class="circularPic logo-img">
+      </router-link>
     </div>
     <div class="col-md-10 d-flex flex-column pt-1 align-items-start">
       <!-- FIXME open a model here on click -->
@@ -42,7 +44,7 @@ import Pop from '../utils/Notifier'
 import { postAgeTag } from '../utils/PostTimeTagger'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 
 export default {
   props: {

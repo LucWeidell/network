@@ -1,7 +1,9 @@
 <template>
   <div v-if="user.isAuthenticated" class="CreatePost row py-2 border border-card m-0 shadow">
     <div class="col-md-2 px-0">
-      <img :src="user.picture" alt="account-pic" class="circularPic logo-img">
+      <router-link :to="{ name: 'Profile', params:{ id: user.id}}">
+        <img :src="user.picture" alt="account-pic" class="circularPic logo-img">
+      </router-link>
     </div>
     <div class="col-md-10 px-0 pr-1">
       <!-- FIXME NEEDED to add post, functionality here -->
