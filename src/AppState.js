@@ -8,6 +8,7 @@ export const AppState = reactive({
   posts: [],
   /** @type {Integer: {Object}} */
   extras: {},
+  profile: {},
 
   /** @type {String} String of the url for next 20 posts */
   newerPosts: null,

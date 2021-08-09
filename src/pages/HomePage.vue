@@ -21,7 +21,6 @@ import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
 import Pop from '../utils/Notifier'
-import { logger } from '../utils/Logger'
 
 export default {
   name: 'Home',
@@ -36,8 +35,6 @@ export default {
       user: computed(() => AppState.user),
       async loadPosts(url) {
         try {
-          logger.log('new:', state.newPosts)
-          logger.log('old:', state.oldPosts)
           const condition = url.split('?')
           const query = { condition }
           await postsService.getAllPosts(query)

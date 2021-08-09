@@ -14,7 +14,7 @@ export function postAgeTag(dateToCompare) {
   } else if (now.getDay() > dateToCompare.getDay()) {
     postTimeTag += (now.getDay() - dateToCompare.getDay()) + 'D'
   } else if (now.getHours() > dateToCompare.getHours()) {
-    postTimeTag += (now.getDay() - dateToCompare.getDay()) + 'h'
+    postTimeTag += (now.getHours() - dateToCompare.getHours()) + 'h'
   } else {
     postTimeTag += (now.getMinutes() - dateToCompare.getMinutes()) + 'm'
   }

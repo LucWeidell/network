@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { logger } from '../utils/Logger'
 
 export default {
   name: 'PostsThread',
@@ -17,7 +16,6 @@ export default {
   },
 
   setup(props) {
-    logger.log('Posts Array:', props)
     return {}
   }
 }

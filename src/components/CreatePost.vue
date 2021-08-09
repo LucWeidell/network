@@ -1,7 +1,7 @@
 <template>
   <div v-if="state.user.isAuthenticated" class="CreatePost row py-2 border border-card m-0 shadow">
     <div class="col-md-2 px-0">
-      <router-link :to="{ name: 'Profile', params:{ id: state.user.id, user: state.user, account: state.account}}">
+      <router-link :to="{ name: 'Profile', params:{ id: state.user.id }}">
         <img :src="state.account.picture" alt="account-pic" class="circularPic post-img">
       </router-link>
     </div>
@@ -45,7 +45,6 @@ export default {
       post: {},
       user: computed(() => AppState.user),
       account: computed(() => AppState.account)
-
     })
     return {
       state,

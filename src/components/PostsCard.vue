@@ -1,7 +1,9 @@
 <template>
   <div class="PostsCard row border border-card mt-3 shadow">
     <div class=" col-md-2 mx-0 d-flex align-items-center justify-content-center">
-      <router-link :to="{ name: 'Profile', params:{ id: post.creator}}">
+      <router-link :to="{ name: 'Profile',
+                          params:{ id: post.creator.id, user: post.creator, account: state.account}}"
+      >
         <img :src="post.creator.picture" alt="creator-pic" class="circularPic post-img w-100">
       </router-link>
     </div>

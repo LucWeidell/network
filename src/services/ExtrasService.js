@@ -5,8 +5,7 @@ import { convertToQuery } from '../utils/Query'
 
 class ExtrasService {
   async getAllExtras(query = {}) {
-    const res = await api.get('api/ads' + convertToQuery(query))
-    logger.log('Sandbox extras getter return:', res.data)
+    const res = await api.get('api/ads/' + convertToQuery(query))
     AppState.extras = res.data
   }
 }

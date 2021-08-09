@@ -3,7 +3,7 @@
        class=" Login col-md-3 shadow-sm px-4 mx-0 my-5 py-5
       d-flex flex-column align-items-center justify-content-start text-left "
   >
-    <router-link :to="{ name: 'Profile', params:{ id: user}}">
+    <router-link :to="{ name: 'Profile', params: { id: account.id}}">
       <img :src="account.picture" alt="profile-pic" class="circularPic w-100 px-3">
     </router-link>
     <!-- NOTE if graduated add the p Tage with class and year -->
@@ -12,7 +12,7 @@
     </p>
     <h4>{{ account.name }}</h4>
     <div class="d-flex flex-column align-items-start my-4">
-      <a :href="account.gitHub">
+      <a :href="account.github">
         <i class="mdi mdi-github">{{ account.github }}</i>
       </a><br>
       <a :href="account.linkedin">
