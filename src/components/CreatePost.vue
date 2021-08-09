@@ -1,8 +1,8 @@
 <template>
-  <div v-if="user.isAuthenticated" class="CreatePost row py-2 border border-card m-0 shadow">
+  <div v-if="state.user.isAuthenticated" class="CreatePost row py-2 border border-card m-0 shadow">
     <div class="col-md-2 px-0">
-      <router-link :to="{ name: 'Profile', params:{ id: user.id, user: user, account: account}}">
-        <img :src="account.picture" alt="account-pic" class="circularPic post-img">
+      <router-link :to="{ name: 'Profile', params:{ id: state.user.id, user: state.user, account: state.account}}">
+        <img :src="state.account.picture" alt="account-pic" class="circularPic post-img">
       </router-link>
     </div>
     <div class="col-md-10 px-0 pr-1">
@@ -42,19 +42,20 @@ export default {
   name: 'CreatePost',
   setup() {
     const state = reactive({
-      post: {}
+      post: {},
+      user: computed(() => AppState.user),
+      account: computed(() => AppState.account)
 
     })
     return {
       state,
-      user: computed(() => AppState.user),
-      account: computed(() => AppState.account),
       async addPost() {
         try {
+          state.post.creatorId = state.user.id
           await postsService.addPost(state.post)
           Pop.toast('success', 'success')
         } catch (error) {
-          Pop.toast('error', error)
+          Pop.toast(error, 'error')
         }
       }
     }
@@ -63,8 +64,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post-img{
-  max-height: 8vh;
-  object-fit: contain;
-}
 </style>

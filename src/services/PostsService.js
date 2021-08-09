@@ -15,7 +15,7 @@ class PostsService {
   async addPost(rawPost) {
     const res = await api.post('api/posts', rawPost)
     logger.log('Sandbox posts Create return:', res.data)
-    AppState.posts = res.data
+    AppState.posts = AppState.posts.push(res.data[0])
   }
 
   async removePost(id) {

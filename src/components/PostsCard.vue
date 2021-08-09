@@ -1,23 +1,31 @@
 <template>
-  <div class="PostsCard row py-2 border border-card mts-3 shadow">
-    <div class=" col-md-2 d-flex">
+  <div class="PostsCard row border border-card mt-3 shadow">
+    <div class=" col-md-2 mx-0 d-flex align-items-center justify-content-center">
       <router-link :to="{ name: 'Profile', params:{ id: post.creator}}">
-        <img :src="post.creator.picture" alt="creator-pic" class="circularPic logo-img">
+        <img :src="post.creator.picture" alt="creator-pic" class="circularPic post-img w-100">
       </router-link>
     </div>
-    <div class="col-md-10 d-flex flex-column pt-1 align-items-start">
+    <div class="col-md-10 d-flex flex-column pt-1">
       <!-- FIXME open a model here on click -->
-      <div>
-        <a href="">
-          <i v-if="post.creator.id === state.account.id" class="mdi mdi-dots-horizontal"></i>
-        </a>
+      <div class="row">
+        <div class="col-md-12 d-flex flex-column pr-2 align-items-end">
+          <a href="">
+            <i v-if="post.creator.id === state.account.id" class="mdi mdi-dots-horizontal"></i>
+          </a>
+        </div>
       </div>
-      <p class="m-0">
-        <b>{{ post.creator.name }}</b>
-      </p>
-      <div>
-        <p>{{ postAge }}</p>
-        <i v-if="post.creator.graduated" class="mdi mdi-account-group"></i>
+      <div class="row">
+        <div class="col-md-12 d-flex flex-column p-0 align-items-start">
+          <p class="m-0">
+            <b>{{ post.creator.name }}</b>
+          </p>
+          <div>
+            <p>
+              {{ postAge }}
+              <i v-if="post.creator.graduated" class="mdi mdi-account-group pl-2"></i>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-12 d-flex flex-column align-items-start text-left mx-3">

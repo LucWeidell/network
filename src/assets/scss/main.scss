@@ -42,3 +42,8 @@ main {
 .object-contain{
   object-fit: contain;
 }
+
+.post-img{
+  max-height: 8vh;
+  object-fit: contain;
+}
