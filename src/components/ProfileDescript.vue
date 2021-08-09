@@ -46,7 +46,7 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { profilesService } from '../services/profilesService'
 import Pop from '../utils/Notifier'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -60,7 +60,7 @@ export default {
     onMounted(async() => {
       try {
         await profilesService.getProfileById(props.router.params.id)
-        logger.log('Profile info:', AppState.profile)
+        // logger.log('Profile info:', AppState.profile)
       } catch (error) {
         Pop.toast(error, 'error')
       }
