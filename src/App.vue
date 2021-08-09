@@ -24,8 +24,16 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
+import { AppState } from './AppState'
+import { AuthService } from './services/AuthService'
+
 export default {
+  name: 'App',
   setup() {
+    return {
+      appState: computed(() => AppState)
+    }
   }
 }
 </script>

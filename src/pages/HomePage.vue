@@ -4,33 +4,19 @@
     <div v-if="user.isAuthenticated" class="col-md-12 pl-5 py-3">
       <CreatePost />
     </div>
-    <div v-if="user.isAuthenticated" class="col-md-12 pl-5 py-3">
-      {{ posts }}
-    </div>
+    <PostsThread class="col-md-12 pl-5 py-3" :posts="posts" />
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { postsService } from '../services/PostsService.js'
-import Pop from '../utils/Notifier'
 
 export default {
   name: 'Home',
   setup() {
-    onMounted(async() => {
-      try {
-        await postsService.getAllPosts()
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        Pop.toast(error, 'error')
-      }
-    })
     return {
-      user: computed(() => {
-        return AppState.user
-      }),
+      user: computed(() => AppState.user),
       posts: computed(() => AppState.posts)
     }
   }
