@@ -12,7 +12,22 @@
       <div class="row">
         <div class="col-md-12 d-flex flex-column pr-2 align-items-end">
           <a href="">
-            <i v-if="post.creator.id === state.account.id" class="mdi mdi-dots-horizontal"></i>
+            <div v-if="post.creator.id === state.account.id" class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+              >
+
+                <i class="mdi mdi-dots-horizontal"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <h6 class="dropdown-item" @click="editPost">Edit</h6>
+                <h6 class="dropdown-item" @click="removePost">Delete</h6>
+              </div>
+            </div>
           </a>
         </div>
       </div>

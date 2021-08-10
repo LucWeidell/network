@@ -33,9 +33,125 @@
       <p>{{ state.profile.bio }}</p>
     </div>
     <div class="col-md-12 d-flex flex-column align-items-end">
-      <button type="button" class="btn btn-primary">
+      <button v-if="state.isCreator" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModalId">
         Edit
       </button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade"
+       id="editModalId"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modelTitleId"
+       aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Profile
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form @submit.prevent="editProfile">
+            <div class="form-group">
+              <label for="coverImg">Cover Img Url</label>
+              <input v-model="state.newProfile.coverImg"
+                     type="text"
+                     class="form-control"
+                     name="coverImg"
+                     id="coverImg"
+                     aria-describedby="helpId"
+                     placeholder="Image Url..."
+              >
+            </div>
+            <div class="form-group">
+              <label for="profileImg">Profile Img Url</label>
+              <input v-model="state.newProfile.picture"
+                     type="text"
+                     class="form-control"
+                     name="profileImg"
+                     id="profileImg"
+                     placeholder="Image Url..."
+              >
+            </div>
+            <div class="form-group">
+              <label for="attendingClass">Attending Class</label>
+              <input v-model="state.newProfile.class"
+                     type="text"
+                     class="form-control"
+                     name="attendingClass"
+                     id="attendingClass"
+                     placeholder="Image Url..."
+              >
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input v-model="state.newProfile.isGraduated"
+                       type="checkbox"
+                       class="form-check-input"
+                       name=""
+                       id=""
+                       value="checkedValue"
+                       checked
+                >
+                Display value
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="github">Github</label>
+              <input v-model="state.newProfile.github"
+                     type="text"
+                     class="form-control"
+                     name="github"
+                     id="github"
+                     placeholder="Url..."
+              >
+            </div>
+            <div class="form-group">
+              <label for="linkedin">Linkedin</label>
+              <input v-model="state.newProfile.linkedin"
+                     type="text"
+                     class="form-control"
+                     name="linkedin"
+                     id="linkedin"
+                     placeholder="Url..."
+              >
+            </div>
+            <div class="form-group">
+              <label for="resume">Resume</label>
+              <input v-model="state.newProfile.resume"
+                     type="text"
+                     class="form-control"
+                     name="resume"
+                     id="resume"
+                     placeholder="Url..."
+              >
+            </div>
+            <div class="form-group">
+              <label for="attendingClass">Bio</label>
+              <input v-model="state.newProfile.bio"
+                     type="text"
+                     class="form-control"
+                     name="attendingClass"
+                     id="attendingClass"
+                     placeholder="Tell us about yourself...."
+              >
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +160,7 @@
 import { reactive } from '@vue/reactivity'
 import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { profilesService } from '../services/profilesService'
+import { profilesService } from '../services/ProfilesService'
 import Pop from '../utils/Notifier'
 // import { logger } from '../utils/Logger'
 
@@ -68,12 +184,21 @@ export default {
     const state = reactive({
       user: computed(() => AppState.user),
       profile: computed(() => AppState.profile),
-      isCreator: computed(() => props.router.params.id === state.user.id)
+      isCreator: computed(() => props.router.params.id === AppState.account.id),
+      newProfile: computed(() => AppState.profileCopy)
 
     })
     return {
       state,
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      async editProfile() {
+        try {
+          await profilesService.editProfile(state.newProfile)
+        // logger.log('Profile info:', AppState.profile)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }

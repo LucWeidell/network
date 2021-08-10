@@ -9,6 +9,7 @@ export const AppState = reactive({
   /** @type {Integer: {Object}} */
   extras: {},
   profile: {},
+  profileCopy: {},
 
   /** @type {String} String of the url for next 20 posts */
   newerPosts: null,
