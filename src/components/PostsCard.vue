@@ -55,8 +55,8 @@
     <div class="col-md-12 d-flex flex-column align-items-end pr-2">
       <p>
         <!-- FIXME add like function on click -->
-        <i v-if="isSelfLiked" @click="editPostLike" class="mdi mdi-heart"></i>
-        <i v-else @click="editPostLike" class="mdi mdi-heart-outline"></i>
+        <i v-if="isSelfLiked" @click="editPostLike" class="action mdi mdi-heart"></i>
+        <i v-else @click="editPostLike" class="action mdi mdi-heart-outline"></i>
         {{ state.editPost.likeIds.length }}
       </p>
     </div>

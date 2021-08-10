@@ -1,6 +1,6 @@
 import { api } from '../services/AxiosService'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 import { convertToQuery } from '../utils/Query'
 
 class PostsService {
@@ -13,7 +13,7 @@ class PostsService {
 
   async addPost(rawPost) {
     const res = await api.post('api/posts', rawPost)
-    logger.log('Sandbox posts Create return:', res.data)
+    // logger.log('Sandbox posts Create return:', res.data)
     AppState.posts.push(res.data)
   }
 
@@ -28,7 +28,7 @@ class PostsService {
     // logger.log('SandBox: edited Post:', res)
     // TODO this appstate switch may be overkill
     let foundPost = AppState.posts.find(p => p.id === editedPost.id)
-    foundPost = editedPost
+    foundPost = res.data
   }
 }
 
