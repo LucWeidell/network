@@ -24,8 +24,8 @@ class PostsService {
   }
 
   async editPost(editedPost) {
-    const res = await api.put('api/posts' + editedPost.id, editedPost)
-    logger.log('SandBox: edited Post:', res)
+    const res = await api.put('api/posts/' + editedPost.id, editedPost)
+    // logger.log('SandBox: edited Post:', res)
     // TODO this appstate switch may be overkill
     let foundPost = AppState.posts.find(p => p.id === editedPost.id)
     foundPost = editedPost

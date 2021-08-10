@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { computed, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
 import Pop from '../utils/Notifier'
@@ -25,6 +25,9 @@ import Pop from '../utils/Notifier'
 export default {
   name: 'Home',
   setup() {
+    onMounted(async() => {
+      postsService.getAllPosts()
+    })
     const state = reactive({
       newPosts: computed(() => AppState.newerPosts),
       oldPosts: computed(() => AppState.previousPosts),

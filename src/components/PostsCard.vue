@@ -11,7 +11,9 @@
       <!-- FIXME open a model here on click -->
       <div class="row">
         <div class="col-md-12 d-flex flex-column pr-2 align-items-end">
-          <a href="">
+          <i @click="removePost" class="mdi mdi-dots-horizontal"></i>
+          <!-- TODO add a drop down for edit -->
+          <!-- <a href="">
             <div v-if="post.creator.id === state.account.id" class="dropdown">
               <button class="btn btn-secondary dropdown-toggle"
                       type="button"
@@ -21,14 +23,13 @@
                       aria-expanded="false"
               >
 
-                <i class="mdi mdi-dots-horizontal"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <h6 class="dropdown-item" @click="editPost">Edit</h6>
                 <h6 class="dropdown-item" @click="removePost">Delete</h6>
               </div>
             </div>
-          </a>
+          </a> -->
         </div>
       </div>
       <div class="row">
@@ -54,9 +55,9 @@
     <div class="col-md-12 d-flex flex-column align-items-end pr-2">
       <p>
         <!-- FIXME add like function on click -->
-        <i v-if="isSelfLiked" class="mdi mdi-heart"></i>
-        <i v-else class="mdi mdi-heart-outline"></i>
-        {{ post.likes.length }}
+        <i v-if="isSelfLiked" @click="editPostLike" class="mdi mdi-heart"></i>
+        <i v-else @click="editPostLike" class="mdi mdi-heart-outline"></i>
+        {{ state.editPost.likeIds.length }}
       </p>
     </div>
   </div>
@@ -69,6 +70,7 @@ import Pop from '../utils/Notifier'
 import { postAgeTag } from '../utils/PostTimeTagger'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -80,7 +82,7 @@ export default {
   name: 'PostsCard',
   setup(props) {
     const state = reactive({
-      editPost: props.post,
+      editPost: computed(() => props.post),
       postMadeAt: new Date(props.post.createdAt),
       account: computed(() => AppState.account),
       user: computed(() => AppState.user)
@@ -99,6 +101,21 @@ export default {
           Pop.toast(error, 'error')
         }
       },
+      async editPostLike() {
+        try {
+          const storedIndex = state.editPost.likeIds.indexOf(state.account.id)
+          if (storedIndex > -1) {
+            state.editPost.likeIds.splice(storedIndex, 1)
+            await postsService.editPost(state.editPost)
+          } else {
+            state.editPost.likeIds.push(state.account.id)
+            await postsService.editPost(state.editPost)
+          }
+          Pop.toast('success', 'success')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
       // FIXME need to work on the edit functionality
       // Open a model edit then change post after confirm edit
       async editPost() {
@@ -113,14 +130,7 @@ export default {
       },
       // NOTE im assumeing this ex: was correct
       // ex post.likeIds: {{ 0: "61104e40d7ce6b36aeacba8e"}}
-      isSelfLiked: computed(() => {
-        const likes = props.post.likeIds
-        let result = false
-        for (const keys in likes) {
-          result = (likes[keys] === state.account.id)
-        }
-        return result
-      })
+      isSelfLiked: computed(() => state.editPost.likeIds.includes(state.account.id))
     }
   }
 }
