@@ -11,7 +11,7 @@
       <!-- FIXME open a model here on click -->
       <div class="row">
         <div class="col-md-12 d-flex flex-column pr-2 align-items-end">
-          <i @click="removePost" class="mdi mdi-dots-horizontal"></i>
+          <i v-if="post.creator.id === state.account.id" @click="removePost" class="action mdi mdi-dots-horizontal"></i>
           <!-- TODO add a drop down for edit -->
           <!-- <a href="">
             <div v-if="post.creator.id === state.account.id" class="dropdown">
@@ -70,7 +70,6 @@ import Pop from '../utils/Notifier'
 import { postAgeTag } from '../utils/PostTimeTagger'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 
 export default {
   props: {

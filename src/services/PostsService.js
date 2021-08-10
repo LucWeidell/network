@@ -1,6 +1,6 @@
 import { api } from '../services/AxiosService'
 import { AppState } from '../AppState'
-// import { logger } from '../utils/Logger'
+import { logger } from '../utils/Logger'
 import { convertToQuery } from '../utils/Query'
 
 class PostsService {
@@ -13,12 +13,12 @@ class PostsService {
 
   async addPost(rawPost) {
     const res = await api.post('api/posts', rawPost)
-    // logger.log('Sandbox posts Create return:', res.data)
-    AppState.posts = AppState.posts.push(res.data[0])
+    logger.log('Sandbox posts Create return:', res.data)
+    AppState.posts.push(res.data)
   }
 
   async removePost(id) {
-    await api.delete('api/posts' + id)
+    await api.delete('api/posts/' + id)
     // logger.log('Delorted Post')
     AppState.posts = AppState.posts.filter(p => p.id !== id)
   }

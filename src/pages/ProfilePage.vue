@@ -3,7 +3,7 @@
     <!-- TODO : home has create post, ThreadPosts, and Post Component in Thread -->
     <div class="col-md-12 pl-5 py-3">
       <ProfileDescript :router="state.router" />
-      <div v-if="state.router.params.id === state.user.id">
+      <div class="mt-3" v-if="state.router.params.id === state.account.id">
         <CreatePost />
       </div>
     </div>
