@@ -92,15 +92,14 @@
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input v-model="state.newProfile.isGraduated"
+                <input v-model="state.newProfile.graduated"
                        type="checkbox"
                        class="form-check-input"
                        name=""
                        id=""
                        value="checkedValue"
-                       checked
                 >
-                Display value
+                Graduated
               </label>
             </div>
             <div class="form-group">

@@ -16,8 +16,9 @@ class ProfilesService {
   }
 
   async editProfile(rawProfile) {
-    const res = await api.put('api/profiles/' + rawProfile.id, rawProfile)
+    const res = await api.put('account', rawProfile)
     AppState.profile = res.data
+    AppState.account = res.data
     AppState.profileCopy = res.data
   }
 }

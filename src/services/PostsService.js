@@ -7,7 +7,7 @@ class PostsService {
   async getAllPosts(query = {}) {
     const res = await api.get('api/posts' + convertToQuery(query))
     AppState.posts = res.data.posts
-    AppState.newerPosts = res.data.newer + ''
+    AppState.newerPosts = res.data.newer
     AppState.previousPosts = res.data.older
   }
 
