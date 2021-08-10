@@ -8,14 +8,14 @@
       </div>
     </div>
     <PostsThread class="col-md-12 pl-5 py-3" :posts="state.posts" />
-    <!-- <div class="d-flex col-md-12 pl-5 py-3 justify-content-around">
-      <h6 v-if="newPosts" class="action" @click.stop="loadPosts(state.newPosts)">
+    <div class="d-flex col-md-12 pl-5 py-3 justify-content-around">
+      <h6 v-if="state.newPosts != null" class="action" @click.stop="loadPosts(state.newPosts)">
         Newer
       </h6>
-      <h6 @click.stop="loadPosts(state.oldPosts)" class="action">
+      <h6 v-if="state.oldPosts" @click.stop="loadPosts(state.oldPosts)" class="action">
         Older
       </h6>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -35,7 +35,9 @@ export default {
       router: router,
       posts: computed(() => AppState.posts),
       user: computed(() => AppState.user),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      newPosts: computed(() => AppState.newerPosts),
+      oldPosts: computed(() => AppState.previousPosts)
     })
     onMounted(async() => {
       try {
@@ -47,7 +49,17 @@ export default {
       }
     })
     return {
-      state
+      state,
+      async loadPosts(url) {
+        try {
+          const condition = url.split('=')
+          const query = { page: condition[1] }
+          await postsService.getAllPosts(query)
+          state.posts = AppState.posts
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   },
   components: {}
